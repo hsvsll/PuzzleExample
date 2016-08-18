@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_puzzle_main_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/ll_puzzle_main_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dip"
+        android:gravity="center_horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="计步："
+            />
+        <TextView
+            android:id="@+id/tv_puzzle_main_counts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:paddingRight="50dip"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="计时："
+            />
+        <TextView
+            android:id="@+id/tv_puzzle_main_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_puzzle_main_bts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dip"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/btn_puzzle_main_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="原图"
+            />
+        <Button
+            android:id="@+id/btn_puzzle_main_restart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="重置"
+            />
+        <Button
+            android:id="@+id/btn_puzzle_main_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="返回"
+            />
+
+    </LinearLayout>
+    <GridView
+        android:id="@+id/gv_puzzle_main_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_puzzle_main_spinner"
+        android:layout_above="@id/ll_puzzle_main_bts"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dip"
+        />
+
+</RelativeLayout>

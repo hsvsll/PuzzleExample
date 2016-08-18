@@ -5,7 +5,46 @@
     >
 
     <TextView
+        android:id="@+id/puzzle_main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:text="拼图游戏" />
+
+    <TextView
+        android:id="@+id/puzzle_main_difficulty_choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/puzzle_main_title"
+        android:layout_below="@id/puzzle_main_title"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:text="选择难度："/>
+
+    <TextView
+        android:id="@+id/tv_puzzle_main_type_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/puzzle_main_difficulty_choice"
+        android:layout_alignBottom="@id/puzzle_main_difficulty_choice"
+        android:paddingLeft="5dp"
+        android:text="2 x 2"/>
+
+    <GridView
+        android:id="@+id/gv_puzzle_main_pic_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dip"
+        android:gravity="center_horizontal"
+        android:horizontalSpacing="10dip"
+        android:numColumns="4"
+        android:padding="10dip"
+        android:verticalSpacing="10dp"
+        android:layout_below="@id/puzzle_main_difficulty_choice"
+        />
 </RelativeLayout>
