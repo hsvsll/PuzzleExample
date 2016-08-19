@@ -201,6 +201,16 @@ public class AppUtils {
 		return screenHeight;
 	}
 
+	/**
+	 * 获取屏幕宽度
+	 */
+	public static int getScreenWidth(Activity activity) {
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int screenWidth = dm.widthPixels;
+		return screenWidth;
+	}
+
 
 	/**
 	 * 获取屏幕destity

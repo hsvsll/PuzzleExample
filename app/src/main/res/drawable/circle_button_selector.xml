@@ -22,7 +22,7 @@
         <shape android:shape="rectangle">
 
             <!--填充颜色-->
-            <solid android:color="@color/colorAccent"/>
+            <solid android:color="@color/title_text"/>
             <!--设置按钮四个角为弧形-->
             <corners android:radius="5dip"/>
 

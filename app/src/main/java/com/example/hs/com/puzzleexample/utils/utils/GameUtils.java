@@ -116,4 +116,23 @@ public class GameUtils {
         return inversions;
     }
 
+    /**
+     * 是否拼图成功
+     *
+     * @return 是否拼图成功
+     */
+    public static boolean isSuccess() {
+        for (ImageItemBean tempBean : GameUtils.mItemBeans) {
+            if (tempBean.getmBitmapId() != 0 &&
+                    (tempBean.getmItemId()) == tempBean.getmBitmapId()) {
+                continue;
+            } else if (tempBean.getmBitmapId() == 0 &&
+                    tempBean.getmItemId() == PuzzleMain.TYPE * PuzzleMain.TYPE) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
 }

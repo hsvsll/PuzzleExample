@@ -31,13 +31,14 @@ public class ImagesUtil {
         //每个Item的宽高
         int itemWidth = picSelected.getWidth()/type;
         int itemHeight = picSelected.getHeight()/type;
-        for(int i= 1;i < type;i++){
+        for(int i= 1;i <= type;i++){
             for(int j = 1;j <= type;j++){
+                //在原有位图上创建一个新的位图
                 bitmap = Bitmap.createBitmap(picSelected,(j-1)*itemWidth,(i-1)*itemHeight,itemWidth,itemHeight);
                 bitmapItems.add(bitmap);
                 itemBean = new ImageItemBean((i-1)*type +j,(i-1)*type +j,bitmap);
 
-//                GameUtil.mItemBeans.add(itemBean);
+                GameUtils.mItemBeans.add(itemBean);
             }
         }
         //保存最后一个图片在拼图完成时填充

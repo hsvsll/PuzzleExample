@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static String TEMP_IMAGE_PATH;
 
     // 游戏类型N*N
-    private int mType = 2;
+    private int mType = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             //选择默认图片
             Intent intent = new Intent(MainActivity.this,PuzzleMain.class);
             intent.putExtra("picSelectedID",mResPicId[position]);
-            intent.putExtra("mType",IMAGE_TYPE);
+            intent.putExtra("mType",mType);
             startActivity(intent);
         }
     }

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.hs.com.puzzleexample.R;
 import com.example.hs.com.puzzleexample.utils.entity.ImageItemBean;
+import com.example.hs.com.puzzleexample.utils.utils.AppUtils;
 import com.example.hs.com.puzzleexample.utils.utils.GameUtils;
 import com.example.hs.com.puzzleexample.utils.utils.ImagesUtil;
 
@@ -30,7 +31,6 @@ import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by huha on 2016/8/18.
@@ -68,9 +68,9 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
     // 选择的图片
     private Bitmap mPicSelected;
     // PuzzlePanel
-    private GridView mGvPuzzleMainDetail;
     private int mResId;
     private String mPicPath;
+    private ImageView mImageView;
     /**
      * 计时器线程
      */
@@ -119,7 +119,7 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         // 生成游戏数据
         generateGame();
         // GridView点击事件
-        mGvPuzzleMainDetail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGvPicDetail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View view,
@@ -147,7 +147,7 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
                         mAdapter.notifyDataSetChanged();
                         Toast.makeText(PuzzleMain.this, "拼图成功!",
                                 Toast.LENGTH_LONG).show();
-                        mGvPuzzleMainDetail.setEnabled(false);
+                        mGvPicDetail.setEnabled(false);
                         mTimer.cancel();
                         mTimerTask.cancel();
                     }
@@ -155,7 +155,7 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
             }
         });
         // 返回按钮点击事件
-        mPuzzleImg.setOnClickListener(this);
+        mPuzzleBack.setOnClickListener(this);
         // 显示原图按钮点击事件
         mPuzzleImg.setOnClickListener(this);
         // 重置按钮点击事件
@@ -167,16 +167,23 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         super.onResume();
     }
 
+    /**
+     * 返回时调用
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 清空相关参数设置
+        cleanConfig();
+        this.finish();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
 
-    @OnClick(R.id.btn_puzzle_main_back)
-    public void puzzleGoBack(){
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -207,9 +214,9 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
                 generateGame();
                 recreateData();
                 // 通知GridView更改UI
-                mTvPuzzleMainCounts.setText("" + COUNT_INDEX);
+                mPuzzleCounts.setText("" + COUNT_INDEX);
                 mAdapter.notifyDataSetChanged();
-                mGvPuzzleMainDetail.setEnabled(true);
+                mGvPicDetail.setEnabled(true);
                 break;
             default:
                 break;
@@ -224,14 +231,14 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         new ImagesUtil().createInitBitmaps(
                 TYPE, mPicSelected, PuzzleMain.this);
         // 生成随机数据
-        GameUtil.getPuzzleGenerator();
+        GameUtils.getPuzzleGenerator();
         // 获取Bitmap集合
-        for (ItemBean temp : GameUtil.mItemBeans) {
-            mBitmapItemLists.add(temp.getBitmap());
+        for (ImageItemBean temp : GameUtils.mItemBeans) {
+            mBitmapItemLists.add(temp.getmBitmap());
         }
         // 数据适配器
-        mAdapter = new GridItemsAdapter(this, mBitmapItemLists);
-        mGvPuzzleMainDetail.setAdapter(mAdapter);
+        mAdapter = new GridPicAdapter(this, mBitmapItemLists);
+        mGvPicDetail.setAdapter(mAdapter);
         // 启用计时器
         mTimer = new Timer(true);
         // 计时器线程
@@ -258,23 +265,13 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
         mImageView.setImageBitmap(mPicSelected);
         int x = (int) (mPicSelected.getWidth() * 0.9F);
         int y = (int) (mPicSelected.getHeight() * 0.9F);
-        LayoutParams params = new LayoutParams(x, y);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(x, y);
         params.addRule(RelativeLayout.CENTER_IN_PARENT);
         mImageView.setLayoutParams(params);
         relativeLayout.addView(mImageView);
         mImageView.setVisibility(View.GONE);
     }
 
-    /**
-     * 返回时调用
-     */
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // 清空相关参数设置
-        cleanConfig();
-        this.finish();
-    }
 
     /**
      * 清空相关参数设置
@@ -314,8 +311,8 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
      */
     private void handlerImage(Bitmap bitmap) {
         // 将图片放大到固定尺寸
-        int screenWidth = ScreenUtil.getScreenSize(this).widthPixels;
-        int screenHeigt = ScreenUtil.getScreenSize(this).heightPixels;
+        int screenWidth = AppUtils.getScreenWidth(this);
+        int screenHeigt = AppUtils.getScreenHeight(this);
         mPicSelected = new ImagesUtil().resizeBitmap(
                 screenWidth * 0.8f, screenHeigt * 0.6f, bitmap);
     }
@@ -325,17 +322,17 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
      */
     private void initViews() {
         // Button
-        mBtnBack = (Button) findViewById(R.id.btn_puzzle_main_back);
-        mBtnImage = (Button) findViewById(R.id.btn_puzzle_main_img);
-        mBtnRestart = (Button) findViewById(R.id.btn_puzzle_main_restart);
+//        mBtnBack = (Button) findViewById(R.id.btn_puzzle_main_back);
+//        mBtnImage = (Button) findViewById(R.id.btn_puzzle_main_img);
+//        mBtnRestart = (Button) findViewById(R.id.btn_puzzle_main_restart);
         // Flag 是否已显示原图
         mIsShowImg = false;
         // GridView
-        mGvPuzzleMainDetail = (GridView) findViewById(
-                R.id.gv_puzzle_main_detail);
+//        mGvPuzzleMainDetail = (GridView) findViewById(
+//                R.id.gv_puzzle_main_detail);
         // 设置为N*N显示
-        mGvPuzzleMainDetail.setNumColumns(TYPE);
-        LayoutParams gridParams = new LayoutParams(
+        mGvPicDetail.setNumColumns(TYPE);
+        RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(
                 mPicSelected.getWidth(),
                 mPicSelected.getHeight());
         // 水平居中
@@ -345,16 +342,13 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
                 RelativeLayout.BELOW,
                 R.id.ll_puzzle_main_spinner);
         // Grid显示
-        mGvPuzzleMainDetail.setLayoutParams(gridParams);
-        mGvPuzzleMainDetail.setHorizontalSpacing(0);
-        mGvPuzzleMainDetail.setVerticalSpacing(0);
+        mGvPicDetail.setLayoutParams(gridParams);
+        mGvPicDetail.setHorizontalSpacing(0);
+        mGvPicDetail.setVerticalSpacing(0);
         // TV步数
-        mTvPuzzleMainCounts = (TextView) findViewById(
-                R.id.tv_puzzle_main_counts);
-        mTvPuzzleMainCounts.setText("" + COUNT_INDEX);
+        mPuzzleCounts.setText("" + COUNT_INDEX);
         // TV计时器
-        mTvTimer = (TextView) findViewById(R.id.tv_puzzle_main_time);
-        mTvTimer.setText("0秒");
+        mPuzzleTime.setText("0秒");
         // 添加显示原图的View
         addImgView();
     }
