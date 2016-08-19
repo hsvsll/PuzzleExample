@@ -44,7 +44,7 @@ public class GameUtils {
     public static void swapItems(ImageItemBean from,ImageItemBean blank){
         ImageItemBean tempItemBean = new ImageItemBean();
         //交换BitmapId
-        tempItemBean.setmItemId(from.getmBitmapId());
+        tempItemBean.setmBitmapId(from.getmBitmapId());
         from.setmBitmapId(blank.getmBitmapId());
         blank.setmBitmapId(tempItemBean.getmBitmapId());
         //交换bitmap
@@ -64,7 +64,7 @@ public class GameUtils {
         //随机打乱顺序
         for(int i = 0;i < mItemBeans.size();i++){
             index = (int) (Math.random()*PuzzleMain.TYPE*PuzzleMain.TYPE);
-            swapItems(mItemBeans.get(index),GameUtils.mBlankItemBean);
+            swapItems(mItemBeans.get(index), GameUtils.mBlankItemBean);
         }
         List<Integer> data = new ArrayList<>();
         for(int i= 0;i<mItemBeans.size();i++){
@@ -100,6 +100,11 @@ public class GameUtils {
         }
     }
 
+    /**
+     * 计算倒置和算法
+     * @param data  拼图数组数据
+     * @return      该序列的倒置和
+     */
     private static int getInversion(List<Integer> data) {
         int inversions = 0;
         int inversionCount = 0;

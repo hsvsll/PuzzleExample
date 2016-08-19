@@ -321,15 +321,8 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
      * 初始化Views
      */
     private void initViews() {
-        // Button
-//        mBtnBack = (Button) findViewById(R.id.btn_puzzle_main_back);
-//        mBtnImage = (Button) findViewById(R.id.btn_puzzle_main_img);
-//        mBtnRestart = (Button) findViewById(R.id.btn_puzzle_main_restart);
         // Flag 是否已显示原图
         mIsShowImg = false;
-        // GridView
-//        mGvPuzzleMainDetail = (GridView) findViewById(
-//                R.id.gv_puzzle_main_detail);
         // 设置为N*N显示
         mGvPicDetail.setNumColumns(TYPE);
         RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(

@@ -44,4 +44,9 @@ public class ImageItemBean {
     public void setmBitmap(Bitmap mBitmap) {
         this.mBitmap = mBitmap;
     }
+
+    @Override
+    public String toString() {
+        return "mItemId ="+mItemId+"; mBitmapId = "+mBitmapId+"; mBitmap = "+mBitmap;
+    }
 }
