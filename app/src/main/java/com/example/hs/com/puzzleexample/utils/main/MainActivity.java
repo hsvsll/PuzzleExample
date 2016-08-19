@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     // 游戏类型N*N
     private int mType = 4;
 
+    //选择图片对话框
+    private CustomPicDialogFragment picDialogFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void showDialogCustom() {
-        CustomPicDialogFragment picDialogFragment = new CustomPicDialogFragment(MainActivity.this);
+        picDialogFragment = new CustomPicDialogFragment(MainActivity.this);
         picDialogFragment.show(getSupportFragmentManager(), "picDialog");
     }
 
@@ -129,8 +132,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         TEMP_IMAGE_PATH = Environment.getExternalStorageDirectory().getPath()+"/temp.png";
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         Uri photoUri = Uri.fromFile(new File(TEMP_IMAGE_PATH));
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
         startActivityForResult(intent,RESULT_CAMERA);
+        if(picDialogFragment !=null){
+            picDialogFragment.dismiss();
+        }
     }
 
     @Override
@@ -138,5 +144,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent intent = new Intent(Intent.ACTION_PICK,null);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,IMAGE_TYPE);
         startActivityForResult(intent,RESULT_IMAGE);
+        if(picDialogFragment !=null){
+            picDialogFragment.dismiss();
+        }
     }
 }

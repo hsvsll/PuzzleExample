@@ -109,7 +109,14 @@ public class PuzzleMain extends AppCompatActivity implements View.OnClickListene
             picSelectedTemp = BitmapFactory.decodeResource(
                     getResources(), mResId);
         } else {
-            picSelectedTemp = BitmapFactory.decodeFile(mPicPath);
+            //获取图片的旋转角度，有些系统把拍照的图片旋转了，有的没有旋转
+            int degree = AppUtils.readPictureDegree(mPicPath);
+            BitmapFactory.Options opts=new BitmapFactory.Options();//获取缩略图显示到屏幕上
+            opts.inSampleSize = 2;
+            Bitmap cbitmap=BitmapFactory.decodeFile(mPicPath,opts);
+            //把图片旋转为正的方向
+            picSelectedTemp = AppUtils.rotaingImageView(degree, cbitmap);
+
         }
         TYPE = getIntent().getExtras().getInt("mType", 2);
         // 对图片处理
