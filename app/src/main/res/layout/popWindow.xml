@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_puzzle_main_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/puzzle_main_popWindow_two"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/text_title" />
+
+    <TextView
+        android:id="@+id/tv_puzzle_main_counts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/puzzle_main_popWindow_three"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/text_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/puzzle_main_popWindow_four"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/text_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/puzzle_main_popWindow_five"
+        android:textColor="@color/title_text"
+        android:textSize="@dimen/text_title" />
+
+
+</LinearLayout>

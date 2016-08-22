@@ -4,18 +4,25 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.hs.com.puzzleexample.R;
 import com.example.hs.com.puzzleexample.utils.custom.CustomPicDialogFragment;
+import com.example.hs.com.puzzleexample.utils.utils.AppUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //选择图片对话框
     private CustomPicDialogFragment picDialogFragment;
 
+    private PopupWindow mPopup;
+    private View mPopupView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             mBitmaps[i] = BitmapFactory.decodeResource(getResources(),mResPicId[i]);
             mPicList.add(mBitmaps[i]);
         }
+        //初始化popupWindow
+        initPopupWindowView();
+
     }
 
     private void initData() {
@@ -102,6 +115,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         picDialogFragment.show(getSupportFragmentManager(), "picDialog");
     }
 
+    private void initPopupWindowView(){
+        mPopupView = LayoutInflater.from(this).inflate(R.layout.popWindow,null);
+    }
+
+    private void popupShow(View view){
+        int desity = (int) AppUtils.getDeviceDensity(this);
+        //显示popup window
+        mPopup = new PopupWindow(mPopupView,200*desity,50*desity);
+        mPopup.setFocusable(true);
+        mPopup.setOutsideTouchable(true);
+        //透明背景
+        Drawable transpent = new ColorDrawable(Color.TRANSPARENT);
+        mPopup.setBackgroundDrawable(transpent);
+        //获取位置
+        int [] location = new int[2];
+        view.getLocationOnScreen(location);
+        mPopup.showAtLocation(view,
+                Gravity.NO_GRAVITY,
+                location[0]-40*desity,
+                location[1]+30*desity);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -110,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 //相册
                 Cursor cursor = this.getContentResolver().query(data.getData(),null,null,null,null);
                 cursor.moveToFirst();
+                /** _data：文件的绝对路径 ，_display_name：文件名 */
                 String imagePath = cursor.getString(cursor.getColumnIndex("_data"));
                 Intent intent = new Intent(MainActivity.this,PuzzleMain.class);
                 intent.putExtra("mType",mType);
