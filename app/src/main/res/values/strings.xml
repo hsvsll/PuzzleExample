@@ -12,8 +12,8 @@
     <string name="puzzle_main_type_selected">2 X 2</string>
     <string name="puzzle_main_record">查看记录</string>
     <string name="puzzle_main_more">了解更多</string>
-    <string name="puzzle_main_popWindow_two">2*2</string>
-    <string name="puzzle_main_popWindow_three">3*3</string>
-    <string name="puzzle_main_popWindow_four">4*4</string>
-    <string name="puzzle_main_popWindow_five">5*5</string>
+    <string name="puzzle_main_popup_two">2*2</string>
+    <string name="puzzle_main_popup_three">3*3</string>
+    <string name="puzzle_main_popup_four">4*4</string>
+    <string name="puzzle_main_popup_five">5*5</string>
 </resources>

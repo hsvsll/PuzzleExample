@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rl_puzzle_main_main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/main_bg"
@@ -10,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/puzzle_main_popWindow_two"
+        android:text="@string/puzzle_main_popup_two"
         android:textColor="@color/title_text"
         android:textSize="@dimen/text_title" />
 
@@ -18,21 +17,21 @@
         android:id="@+id/tv_puzzle_main_counts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/puzzle_main_popWindow_three"
+        android:text="@string/puzzle_main_popup_three"
         android:textColor="@color/title_text"
         android:textSize="@dimen/text_title" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/puzzle_main_popWindow_four"
+        android:text="@string/puzzle_main_popup_four"
         android:textColor="@color/title_text"
         android:textSize="@dimen/text_title" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/puzzle_main_popWindow_five"
+        android:text="@string/puzzle_main_popup_five"
         android:textColor="@color/title_text"
         android:textSize="@dimen/text_title" />
 
