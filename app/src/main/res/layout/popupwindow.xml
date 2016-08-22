@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <Button
+        android:id="@+id/btn_puzzle_popup_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/puzzle_main_popup_two"
+        android:background="@drawable/circle_button_selector"
+        android:textSize="@dimen/text_title" />
+
+    <Button
+        android:id="@+id/btn_puzzle_popup_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_puzzle_popup_two"
+        android:background="@drawable/circle_button_selector"
+        android:text="@string/puzzle_main_popup_three"
+        android:textSize="@dimen/text_title" />
+
+    <Button
+        android:id="@+id/btn_puzzle_popup_four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_puzzle_popup_three"
+        android:background="@drawable/circle_button_selector"
+        android:text="@string/puzzle_main_popup_four"
+        android:textSize="@dimen/text_title" />
+
+    <Button
+        android:id="@+id/btn_puzzle_popup_five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_puzzle_popup_four"
+        android:background="@drawable/circle_button_selector"
+        android:text="@string/puzzle_main_popup_five"
+        android:textSize="@dimen/text_title" />
+
+
+</RelativeLayout>

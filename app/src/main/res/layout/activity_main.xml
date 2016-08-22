@@ -31,7 +31,6 @@
         android:layout_toRightOf="@id/puzzle_main_difficulty_choice"
         android:layout_alignBottom="@id/puzzle_main_difficulty_choice"
         android:paddingLeft="5dp"
-        android:onClick="popupShow()"
         android:text="2 x 2"/>
 
     <GridView

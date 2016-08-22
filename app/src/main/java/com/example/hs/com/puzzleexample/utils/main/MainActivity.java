@@ -15,7 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -29,8 +31,9 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,CustomPicDialogFragment.SelectedPicWayListener{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,CustomPicDialogFragment.SelectedPicWayListener,View.OnClickListener{
     @Bind(R.id.tv_puzzle_main_type_selected)
     TextView mTypeSelected;
     @Bind(R.id.gv_puzzle_main_pic_list)
@@ -58,6 +61,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private PopupWindow mPopup;
     private View mPopupView;
+
+    private Button mSelectTwo;
+    private Button mSelectThree;
+    private Button mSelectFour;
+    private Button mSelectFive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,13 +124,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void initPopupWindowView(){
-        mPopupView = LayoutInflater.from(this).inflate(R.layout.popWindow,null);
+        mPopupView = LayoutInflater.from(this).inflate(R.layout.popupwindow,null);
+        mSelectTwo = (Button) mPopupView.findViewById(R.id.btn_puzzle_popup_two);
+        mSelectThree = (Button) mPopupView.findViewById(R.id.btn_puzzle_popup_three);
+        mSelectFour = (Button) mPopupView.findViewById(R.id.btn_puzzle_popup_four);
+        mSelectFive = (Button) mPopupView.findViewById(R.id.btn_puzzle_popup_five);
+        mSelectTwo.setOnClickListener(this);
+        mSelectThree.setOnClickListener(this);
+        mSelectFour.setOnClickListener(this);
+        mSelectFive.setOnClickListener(this);
     }
 
-    private void popupShow(View view){
+    @OnClick(R.id.tv_puzzle_main_type_selected)
+    public void popupShow(){
         int desity = (int) AppUtils.getDeviceDensity(this);
         //显示popup window
-        mPopup = new PopupWindow(mPopupView,200*desity,50*desity);
+//        mPopup = new PopupWindow(mPopupView,200*desity,50*desity);
+        mPopup = new PopupWindow(mPopupView, 200*desity ,ViewGroup.LayoutParams.WRAP_CONTENT);
         mPopup.setFocusable(true);
         mPopup.setOutsideTouchable(true);
         //透明背景
@@ -130,11 +148,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mPopup.setBackgroundDrawable(transpent);
         //获取位置
         int [] location = new int[2];
-        view.getLocationOnScreen(location);
-        mPopup.showAtLocation(view,
+        mTypeSelected.getLocationOnScreen(location);
+        mPopup.showAtLocation(mTypeSelected,
                 Gravity.NO_GRAVITY,
-                location[0]-40*desity,
-                location[1]+30*desity);
+                location[0] - 40 * desity,
+                location[1] + 30 * desity);
     }
 
     @Override
@@ -182,6 +200,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivityForResult(intent,RESULT_IMAGE);
         if(picDialogFragment !=null){
             picDialogFragment.dismiss();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(mPopup.isShowing()){
+            mPopup.dismiss();
+        }
+        switch (v.getId()){
+            case R.id.btn_puzzle_popup_two:
+                mTypeSelected.setText(R.string.puzzle_main_popup_two);
+                mType = 2;
+                break;
+            case R.id.btn_puzzle_popup_three:
+                mTypeSelected.setText(R.string.puzzle_main_popup_three);
+                mType = 3;
+                break;
+            case R.id.btn_puzzle_popup_four:
+                mTypeSelected.setText(R.string.puzzle_main_popup_four);
+                mType = 4;
+                break;
+            case R.id.btn_puzzle_popup_five:
+                mTypeSelected.setText(R.string.puzzle_main_popup_five);
+                mType = 5;
+                break;
         }
     }
 }
